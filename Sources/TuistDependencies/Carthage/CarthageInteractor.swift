@@ -148,7 +148,7 @@ public final class CarthageInteractor: CarthageInteracting {
 
         // create `Cartfile`
         let cartfileContent = dependencies.cartfileValue()
-        let cartfilePath = pathsProvider.temporaryCartfilePath
+        let cartfilePath = pathsProvider.destinationCartfilePath
         try FileHandler.shared.createFolder(cartfilePath.removingLastComponent())
         try FileHandler.shared.write(cartfileContent, path: cartfilePath, atomically: true)
 
@@ -158,7 +158,7 @@ public final class CarthageInteractor: CarthageInteracting {
 
     /// Saves lockfile resolved dependencies in `Tuist/Dependencies` directory.
     private func saveDependencies(pathsProvider: CarthagePathsProvider) throws {
-        guard FileHandler.shared.exists(pathsProvider.temporaryCartfilePath) else {
+        guard FileHandler.shared.exists(pathsProvider.destinationCartfilePath) else {
             throw CarthageInteractorError.cartfileNotFound
         }
 
@@ -170,17 +170,11 @@ public final class CarthageInteractor: CarthageInteracting {
         }
 
         try copy(
-            from: pathsProvider.temporaryCartfilePath,
-            to: pathsProvider.destinationCartfilePath
-        )
-
-        try copy(
             from: pathsProvider.temporaryCartfileResolvedPath,
             to: pathsProvider.destinationCartfileResolvedPath
         )
 
         // remove temporary files
-        try? FileHandler.shared.delete(pathsProvider.temporaryCartfilePath)
         try? FileHandler.shared.delete(pathsProvider.temporaryCartfileResolvedPath)
     }
 
@@ -206,7 +200,6 @@ private struct CarthagePathsProvider {
     let destinationCarthageDirectory: AbsolutePath
     let destinationCarthageBuildDirectory: AbsolutePath
 
-    let temporaryCartfilePath: AbsolutePath
     let temporaryCartfileResolvedPath: AbsolutePath
 
     init(dependenciesDirectory: AbsolutePath) {
@@ -223,8 +216,6 @@ private struct CarthagePathsProvider {
         destinationCarthageBuildDirectory = destinationCarthageDirectory
             .appending(component: "Build")
 
-        temporaryCartfilePath = dependenciesDirectory
-            .appending(component: Constants.DependenciesDirectory.cartfileName)
         temporaryCartfileResolvedPath = dependenciesDirectory
             .appending(component: Constants.DependenciesDirectory.cartfileResolvedName)
     }

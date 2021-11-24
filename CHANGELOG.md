@@ -56,6 +56,7 @@ Please, check out guidelines: https://keepachangelog.com/en/1.0.0/
 ### Fixed
 
 - Fixed caching of targets with `sdk` dependencies [#3681](https://github.com/tuist/tuist/pull/3681) by [@danyf90](https://github.com/danyf90)
+- Fixed persisting generated `Package.swift` and `Cartfile` [#3729](https://github.com/tuist/tuist/pull/3729) by [@thedavidharris](https://github.com/thedavidharris)
 
 ## 2.2.1 - Weg
 
