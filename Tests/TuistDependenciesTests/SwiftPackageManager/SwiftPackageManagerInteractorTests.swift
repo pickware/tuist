@@ -102,7 +102,7 @@ final class SwiftPackageManagerInteractorTests: TuistUnitTestCase {
             swiftPackageManagerDirectory,
             [
                 ".build",
-                "Package.swift"
+                "Package.swift",
             ]
         )
         try XCTAssertDirectoryContentEqual(
@@ -194,7 +194,7 @@ final class SwiftPackageManagerInteractorTests: TuistUnitTestCase {
             swiftPackageManagerDirectory,
             [
                 ".build",
-                "Package.swift"
+                "Package.swift",
             ]
         )
         try XCTAssertDirectoryContentEqual(
@@ -282,7 +282,7 @@ final class SwiftPackageManagerInteractorTests: TuistUnitTestCase {
             swiftPackageManagerDirectory,
             [
                 ".build",
-                "Package.swift"
+                "Package.swift",
             ]
         )
         try XCTAssertDirectoryContentEqual(
