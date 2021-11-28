@@ -15,6 +15,7 @@ if let argumentIndex = CommandLine.arguments.firstIndex(of: "--path") {
     path = .current
 }
 
+try TuistSupport.Environment.bootstrap()
 try TuistAnalytics.bootstrap(config: ConfigLoader().loadConfig(path: path))
 
 import TuistKit
